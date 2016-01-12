@@ -28,6 +28,10 @@ echo "BLFS LSB_Core started on $(date -u)" >> /build-logs/0-milestones.log
 
 time {
 
+### http://www.linuxfromscratch.org/blfs/view/stable/general/nspr.html
+### No Req/Rec/Opt
+./9-genlibs/nspr.sh
+
 
 ## 	http://www.linuxfromscratch.org/blfs/view/stable/general/at.html
 ## Requires an MTA
@@ -48,9 +52,6 @@ time {
 
 #Lsb_release
 
-### http://www.linuxfromscratch.org/blfs/view/stable/general/nspr.html
-### No Req/Rec/Opt
-./9-genlibs/nspr
 
 ### http://www.linuxfromscratch.org/blfs/view/stable/postlfs/nss.html
 ### Req NSPR, Rec SQLite

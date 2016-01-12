@@ -49,13 +49,13 @@ function check_user {
 
 function test_only_one_tarball_exists {
 	echo "*** Validating one and only one tarball exists."
-	LFS_SOURCE_FILE_NAME=$(ls | egrep "^$LFS_SOURCE_FILE_PREFIX.+tar")
-	LFS_SOURCE_FILE_COUNT=$(ls | egrep "^$LFS_SOURCE_FILE_PREFIX.+tar" | wc -l)
-	if [ $LFS_SOURCE_FILE_COUNT -eq 0 ]; then
-		echo "*** No '$LFS_SOURCE_FILE_PREFIX' tarballs found.  Exiting script."
+	BLFS_SOURCE_FILE_NAME=$(ls | egrep "^$BLFS_SOURCE_FILE_PREFIX.+tar")
+	BLFS_SOURCE_FILE_COUNT=$(ls | egrep "^$BLFS_SOURCE_FILE_PREFIX.+tar" | wc -l)
+	if [ $BLFS_SOURCE_FILE_COUNT -eq 0 ]; then
+		echo "*** No '$BLFS_SOURCE_FILE_PREFIX' tarballs found.  Exiting script."
 		exit 2
-	elif [ $LFS_SOURCE_FILE_COUNT -gt 1 ]; then
-		echo "*** Multiple '$LFS_SOURCE_FILE_PREFIX' tarballs found ($LFS_SOURCE_FILE_COUNT).  Exiting script."
+	elif [ $BLFS_SOURCE_FILE_COUNT -gt 1 ]; then
+		echo "*** Multiple '$BLFS_SOURCE_FILE_PREFIX' tarballs found ($BLFS_SOURCE_FILE_COUNT).  Exiting script."
 		exit 3
 	fi
 }
@@ -68,15 +68,14 @@ function extract_tarball {
 	# specifying this path will no longer be necessary and /sources will be off
 	# the root of the directory structure.  
 	
-	ROOT_PATH="$1"
 	
-	echo "*** Extracting ... $LFS_SOURCE_FILE_NAME"
-	if [ ! -d $ROOT_PATH/sources/$LFS_SOURCE_FILE_PREFIX*/  ]; then
-	    echo "*** Source directory does not exist. Extracting ... $LFS_SOURCE_FILE_NAME"
-	    tar xf $LFS_SOURCE_FILE_NAME
+	echo "*** Extracting ... $BLFS_SOURCE_FILE_NAME"
+	if [ ! -d /sources/$BLFS_SOURCE_FILE_PREFIX*/  ]; then
+	    echo "*** Source directory does not exist. Extracting ... $BLFS_SOURCE_FILE_NAME"
+	    tar xf $BLFS_SOURCE_FILE_NAME
 	else
-	    echo "*** Source directory found matching prefix '$LFS_SOURCE_FILE_PREFIX'.  Not Extracting"
-	    LFS_DO_NOT_DELETE_SOURCES_DIRECTORY=1
+	    echo "*** Source directory found matching prefix '$BLFS_SOURCE_FILE_PREFIX'.  Not Extracting"
+	    BLFS_DO_NOT_DELETE_SOURCES_DIRECTORY=1
 	fi
 }
 
@@ -87,13 +86,12 @@ function show_build_errors {
 	# 6.4, when the root account has chrooted to the LFS_MOUNT_DIR path,
 	# specifying this path will no longer be necessary and /sources will be off
 	# the root of the directory structure.  
-	
-	ROOT_PATH="$1"
-	LFS_WARNING_COUNT=0
+
+	BLFS_WARNING_COUNT=0
   LFS_ERROR_COUNT=0
 
-	LFS_WARNING_COUNT=$(grep -n " [Ww]arnings*:* " $ROOT_PATH/build-logs/$LFS_SECTION* | wc -l)
-	LFS_ERROR_COUNT=$(grep -n " [Ee]rrors*:* \|^FAIL:" $ROOT_PATH/build-logs/$LFS_SECTION* | wc -l)
+	BLFS_WARNING_COUNT=$(grep -n " [Ww]arnings*:* " /build-logs/$BLFS_SECTION* | wc -l)
+	BLFS_ERROR_COUNT=$(grep -n " [Ee]rrors*:* \|^FAIL:" /build-logs/$BLFS_SECTION* | wc -l)
 	
 	
 #  ### Commenting this block out because some sections generate a lot of warnings that
@@ -106,12 +104,12 @@ function show_build_errors {
 #	fi
 
 
-	if [ $LFS_ERROR_COUNT -ne 0 ]; then
-	    echo "*** $LFS_ERROR_COUNT Errors Found In Build Logs for ... $LFS_SOURCE_FILE_NAME"
-	    grep -n " [Ee]rrors*:* \|^FAIL:" $ROOT_PATH/build-logs/$LFS_SECTION*
+	if [ $BLFS_ERROR_COUNT -ne 0 ]; then
+	    echo "*** $BLFS_ERROR_COUNT Errors Found In Build Logs for ... $BLFS_SOURCE_FILE_NAME"
+	    grep -n " [Ee]rrors*:* \|^FAIL:" /build-logs/$BLFS_SECTION*
 	    echo "Compare against known good logs at: http://www.linuxfromscratch.org/lfs/build-logs"
 	else 
-		  echo "*** $LFS_ERROR_COUNT Errors Found In Build Logs for ... $LFS_SOURCE_FILE_NAME"
+		  echo "*** $BLFS_ERROR_COUNT Errors Found In Build Logs for ... $BLFS_SOURCE_FILE_NAME"
 	fi
 }
 
@@ -127,21 +125,20 @@ function capture_file_list {
 	# specifying this path will no longer be necessary and /sources will be off
 	# the root of the directory structure.  
 	
-	ROOT_PATH="$1"
-	find $ROOT_PATH/ \
-	  -path $ROOT_PATH/proc -prune \
-	  -or -path $ROOT_PATH/sys -prune  \
-	  -or -path $ROOT_PATH/dev -prune  \
-	  -or -path $ROOT_PATH/sources -prune  \
+	find / \
+	  -path /proc -prune \
+	  -or -path /sys -prune  \
+	  -or -path /dev -prune  \
+	  -or -path /sources -prune  \
 	  -or -print \
-	  &> $ROOT_PATH/build-logs/$LFS_SECTION-filelist-chapter-end.log 
+	  &> /build-logs/$BLFS_SECTION-filelist-chapter-end.log 
 }
 
 
 function chapter_footer {
 	echo
-	echo "### Error Count: $LFS_ERROR_COUNT    Warning Count: $LFS_WARNING_COUNT"
-	echo "############ End Section $LFS_SECTION ################################"
+	echo "### Error Count: $BLFS_ERROR_COUNT    Warning Count: $BLFS_WARNING_COUNT"
+	echo "############ End Section $BLFS_SECTION ################################"
 	echo 
 }
 

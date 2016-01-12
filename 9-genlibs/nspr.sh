@@ -18,8 +18,8 @@ echo "BLFS $LFS_SOURCE_FILE_PREFIX started on $(date -u)" >> /build-logs/0-miles
 # For initial packages as root on host OS
 # BLFS_SOURCE_FTP_FQDN=openssl.org
 # BLFS_SOURCE_FTP_PATH=source
-BLFS_SOURCE_FILE_NAME="$(grep -o "MD5=$BLFS_SOURCE_FILE_PREFIX.*=[a-z0-9]*" ./blfs-wget-list | cut -d= -f2)"
-BLFS_SOURCE_MD5="$(grep -o "MD5=$LFS_SOURCE_FILE_PREFIX.*=[a-z0-9]*" ./blfs-wget-list | cut -d= -f3)"
+BLFS_SOURCE_FILE_NAME="$(grep -o "MD5=$BLFS_SOURCE_FILE_PREFIX.*=[a-z0-9]*" ./wget-list-blfs | cut -d= -f2)"
+BLFS_SOURCE_MD5="$(grep -o "MD5=$LFS_SOURCE_FILE_PREFIX.*=[a-z0-9]*" ./wget-list-blfs | cut -d= -f3)"
 
 echo "*** BLFS_SOURCE_FILE_NAME=$BLFS_SOURCE_FILE_NAME"
 echo "*** BLFS_SOURCE_MD5=$BLFS_SOURCE_MD5"
@@ -47,48 +47,49 @@ cd $(ls -d /sources/$LFS_SOURCE_FILE_PREFIX*/)
 
 time {
 		
-	echo "*** Running Pre-Configuration Tasks ... $LFS_SOURCE_FILE_NAME"
+	echo "*** Running Pre-Configuration Tasks ... $BLFS_SOURCE_FILE_NAME"
 	### None
+	cd nspr
 	
 	sed -ri 's#^(RELEASE_BINS =).*#\1#' pr/src/misc/Makefile.in
 	
 	sed -i 's#$(LIBRARY) ##' config/rules.mk
 	
-	echo "*** Running Configure ... $LFS_SOURCE_FILE_NAME"
+	echo "*** Running Configure ... $BLFS_SOURCE_FILE_NAME"
 	./configure --prefix=/usr \
             --with-mozilla \
             --with-pthreads \
-            $([ $(uname -m) = x86_64 ] && echo --enable-64bit) 			&> $LFS_LOG_FILE-1-configure.log
+            $([ $(uname -m) = x86_64 ] && echo --enable-64bit) 			&> $BLFS_LOG_FILE-1-configure.log
 	
-	echo "*** Running Make ... $LFS_SOURCE_FILE_NAME"
-	make  														&> $LFS_LOG_FILE-2-make.log
+	echo "*** Running Make ... $BLFS_SOURCE_FILE_NAME"
+	make  														&> $BLFS_LOG_FILE-2-make.log
 	
-	echo "*** Running Make Check ... $LFS_SOURCE_FILE_NAME"
+	echo "*** Running Make Check ... $BLFS_SOURCE_FILE_NAME"
 	### None 
 	
-	echo "*** Running Make Install ... $LFS_SOURCE_FILE_NAME"
-	make install  										&> $LFS_LOG_FILE-3-make-install.log
+	echo "*** Running Make Install ... $BLFS_SOURCE_FILE_NAME"
+	make install  										&> $BLFS_LOG_FILE-3-make-install.log
 	
-	echo "*** Performing Post-Make Tasks ... $LFS_SOURCE_FILE_NAME"
+	echo "*** Performing Post-Make Tasks ... $BLFS_SOURCE_FILE_NAME"
 	### None
 }
 
 ########## Chapter Clean-Up ##########
 
 echo ""	
-echo "*** Running Clean Up Tasks ... $LFS_SOURCE_FILE_NAME"
+echo "*** Running Clean Up Tasks ... $BLFS_SOURCE_FILE_NAME"
 cd /sources
-[ ! $LFS_DO_NOT_DELETE_SOURCES_DIRECTORY ] && rm -rf $(ls -d  /sources/$LFS_SOURCE_FILE_PREFIX*/)
-rm -rf $LFS_BUILD_DIRECTORY
+[ ! $BLFS_DO_NOT_DELETE_SOURCES_DIRECTORY ] && rm -rf $(ls -d  /sources/$BLFS_SOURCE_FILE_PREFIX*/)
+rm -rf $BLFS_BUILD_DIRECTORY
 
-echo "$LFS_SOURCE_FILE_NAME" >> /build-logs/0-installed.log
+echo "$BLFS_SOURCE_FILE_NAME" >> /build-logs/0-installed.log
 
 echo ""
 show_build_errors ""
 capture_file_list "" 
 chapter_footer
 
-if [ $LFS_ERROR_COUNT -ne 0 ]; then
+if [ $BLFS_ERROR_COUNT -ne 0 ]; then
 	exit 4
 else
 	exit
