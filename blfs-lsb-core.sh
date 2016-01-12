@@ -51,7 +51,7 @@ time {
 
 ### http://www.linuxfromscratch.org/blfs/view/stable/general/nspr.html
 ### No Req/Rec/Opt
-./genlibs/nspr
+./9-genlibs/nspr
 
 ### http://www.linuxfromscratch.org/blfs/view/stable/postlfs/nss.html
 ### Req NSPR, Rec SQLite
