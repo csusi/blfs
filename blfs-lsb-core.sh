@@ -1,13 +1,13 @@
+#!/bin/bash
+echo ""
+echo "### BLFS - The LSB Core "
+echo "### ========================================================================="
+
 ### Questions:  
 ### 1) Get source a) all at once? b) At once in batches c) Individually
 ### 2) Backup source? 
 ### 3) Check if installed already
 
-
-#!/bin/bash
-echo ""
-echo "### BLFS - The LSB Core "
-echo "### ========================================================================="
 
 ### From LFS iv. - LFS and Standards
 ### http://refspecs.linuxfoundation.org/lsb.shtml
@@ -18,14 +18,13 @@ echo "### ======================================================================
 
 
 if [ ! -f ./blfs-include.sh ];then
-    echo "*** Fatal Error - './lfs-include.sh' not found." ; exit 8 ; fi
-source ./lfs-include.sh
+    echo "*** Fatal Error - './blfs-include.sh' not found." ; exit 8 ; fi
+source ./blfs-include.sh
 
 echo "*** Validating the environment."
 check_user root     
-check_chroot_to_lfs_rootdir 
 
-echo "Chapter Ch. 6.51 to 6.70 started on $(date -u)" >> /build-logs/0-milestones.log
+echo "BLFS LSB_Core started on $(date -u)" >> /build-logs/0-milestones.log
 
 time {
 
