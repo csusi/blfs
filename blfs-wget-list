@@ -1,0 +1,8 @@
+# Req=Required, Rec=Recommended, Opt=Optional
+
+# 9. nspr - Req for NSS
+# http://www.linuxfromscratch.org/blfs/view/stable/general/nspr.html
+MD5=nspr-4.10.9.tar.gz=86769a7fc3b4c30f7fdcb45ab284c452
+https://ftp.mozilla.org/pub/mozilla.org/nspr/releases/v4.10.9/src/nspr-4.10.9.tar.gz
+
+

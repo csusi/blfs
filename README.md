@@ -1,8 +1,12 @@
 # blfs
-Beyond Linux From Shell - Shell scripts to go... Beyond Linux From Scratch (version 7.8)
+Beyond Linux From Shell - Shell scripts to take you . . . Beyond Linux From Scratch (version 7.8)
 
-If you are reading this, I was able to use git to clone this repository from github, use VI to edit this file, commit the change, and push it back up to github.
+blfs-lsb-core.sh
+================
 
-And have enough time to go play bar trivia tonight.
+### Builds remaining packages required for an LSB-Core
+###   At, Batch (a part of At), Cpio, Ed, Fcrontab, Initd-tools, 
+###   Lsb_release, NSPR, NSS, PAM, Pax, Sendmail (or Postfix or Exim), time
 
-testing once more
+
+
