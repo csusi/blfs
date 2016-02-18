@@ -1,8 +1,32 @@
 # Req=Required, Rec=Recommended, Opt=Optional
 
+# 3. lsb-release
+# http://www.linuxfromscratch.org/blfs/view/stable/postlfs/lsb-release.html
+MD5=lsb-release-1.4.tar.gz=30537ef5a01e0ca94b7b8eb6a36bb1e4
+http://sourceforge.net/projects/lsb/files/lsb_release/1.4/lsb-release-1.4.tar.gz
+
+# 4. nss 
+# http://www.linuxfromscratch.org/blfs/view/stable/postlfs/nss.html
+MD5=nss-3.20.tar.gz=db83988499d1eb3b623d77ecf495b0f5
+https://ftp.mozilla.org/pub/mozilla.org/security/nss/releases/NSS_3_20_RTM/src/nss-3.20.tar.gz
+http://www.linuxfromscratch.org/patches/blfs/7.8/nss-3.20-standalone-1.patch
+
 # 9. nspr - Req for NSS
 # http://www.linuxfromscratch.org/blfs/view/stable/general/nspr.html
 MD5=nspr-4.10.9.tar.gz=86769a7fc3b4c30f7fdcb45ab284c452
 https://ftp.mozilla.org/pub/mozilla.org/nspr/releases/v4.10.9/src/nspr-4.10.9.tar.gz
 
+# 11. time - No Req/Rec/Opt
+# http://www.linuxfromscratch.org/blfs/view/stable/general/time.html
+MD5=time-1.7.tar.gz=e38d2b8b34b1ca259cf7b053caac32b3 
+http://ftp.gnu.org/gnu/time/time-1.7.tar.gz
 
+# 12. initd-tools - No Req/Rec/Opt
+# http://www.linuxfromscratch.org/blfs/view/stable/general/initd-tools.html
+MD5=initd-tools-0.1.3.tar.gz=ab6377700ace81ec5a556ebdbae1d8d9 
+http://people.freedesktop.org/~dbn/initd-tools/releases/initd-tools-0.1.3.tar.gz
+
+# 12. pax / heirloom - No Req/Rec/Opt
+# http://www.linuxfromscratch.org/blfs/view/stable/general/pax.html
+MD5=heirloom-070715.tar.bz2=d846be4b268b1d55b6ffcef847f09979 
+http://downloads.sourceforge.net/heirloom/heirloom-070715.tar.bz2

@@ -10,6 +10,7 @@ echo "### ======================================================================
 
 
 ### From LFS iv. - LFS and Standards
+### http://www.linuxfromscratch.org/lfs/view/stable/prologue/standards.html
 ### http://refspecs.linuxfoundation.org/lsb.shtml
 
 ### Builds remaining packages required for an LSB-Core
@@ -27,11 +28,30 @@ check_user root
 echo "BLFS LSB_Core started on $(date -u)" >> /build-logs/0-milestones.log
 
 time {
+	
+	### http://www.linuxfromscratch.org/blfs/view/stable/postlfs/lsb-release.html
+	### No Req/Rec/Opt
+	./3-afterlfs-lsb_release.sh
+	
+	### http://www.linuxfromscratch.org/blfs/view/stable/general/pax.html
+	### No Req/Rec/Opt
+	./12-sysutils-pax.sh
 
-### http://www.linuxfromscratch.org/blfs/view/stable/general/nspr.html
-### No Req/Rec/Opt
-./9-genlibs/nspr.sh
+	### http://www.linuxfromscratch.org/blfs/view/stable/general/nspr.html
+	### No Req/Rec/Opt
+	./9-genlibs-nspr.sh
 
+	## http://www.linuxfromscratch.org/blfs/view/stable/general/time.html
+	## No Req/Rec/Opt
+	./11-genutils-time.sh
+
+	## http://www.linuxfromscratch.org/blfs/view/stable/postlfs/lsb-release.html
+	## No Req/Rec/Opt
+	./12-sysutils-initd-tools.sh
+	
+	### http://www.linuxfromscratch.org/blfs/view/stable/postlfs/nss.html
+	### Req NSPR, Rec SQLite
+	./4-security-nss.sh
 
 ## 	http://www.linuxfromscratch.org/blfs/view/stable/general/at.html
 ## Requires an MTA
@@ -48,33 +68,17 @@ time {
 
 #Fcrontab
 
-#Initd-tools
-
-#Lsb_release
-
-
-### http://www.linuxfromscratch.org/blfs/view/stable/postlfs/nss.html
-### Req NSPR, Rec SQLite
-#./security/nss.sh
-
 #PAM
 
-#Pax
-
 #Sendmail (or Postfix or Exim)
-
-## http://www.linuxfromscratch.org/blfs/view/stable/general/time.html
-## No Req/Rec/Opt
-#./genutil/time
-
 
 }
 
 echo "Chapter Ch. 6.51 to 6.70 finished on $(date -u)" >> /build-logs/0-milestones.log
 
 echo ""
-echo "########################## End Chapter 6.51 to 6.70 ##########################"
-echo "*** If builds are OK, run (Ch 6.71 is informational):"
-echo "*** --> ./lfs-6.72-chroot.sh"
+echo "########################## BLFS - The LSB Core  ##########################"
+echo "*** "
+echo "*** "
 echo ""
 

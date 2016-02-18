@@ -1,41 +1,10 @@
-### 6.x. Global Header
-### ================================================
 
-### Count of lines in wget-list +2 for wget-list and mdsums files
-LFS_SOURCES_EXPECTED_COUNT=82
-LFS_SOURCES_LIST="http://www.linuxfromscratch.org/lfs/view/7.8/wget-list"
-LFS_SOURCES_MD5_SUMS="http://www.linuxfromscratch.org/lfs/view/7.8//md5sums"
-
-### TODO: if this becomes ../lfs-backup then may be able to keep build on host OS contained to user home dir instead of in /root
-LFS_SOURCES_BACKUP_DIR=/root/lfs-backup/sources/
 
 ### Setting the '-j4' switch on all of the 'make' commands to use all four   
 ### processors of the VM. This can cause race conditions when compiling some 
 ### packages. If encountered, set 'LFS_MAKE_FLAGS='within the bash script 
 ### in the pre-configuration tasks.
-LFS_MAKE_FLAGS=-j4
-
-### Used 5.36 to make a backup of completed tools and move build-logs
-LFS_TOOLS_BACKUP_DIR=/root/lfs-backup/tools
-
-### Used in 7.5 for general networking configuration
-### /etc/sysconfig/ifconfig.eth0
-LFS_IP_ADDR=10.0.0.222
-LFS_IP_GATEWAY=10.0.0.1
-LFS_IP_PREFIX=24
-LFS_IP_BROADCAST=10.0.255.255
-### /etc/resolv.conf
-LFS_IP_DOMAINNAME=susiland.net
-LFS_IP_NAMESERVER1=10.0.0.1
-LFS_IP_NAMESERVER2=10.0.0.52
-### /etc/hostname & /etc/hosts
-LFS_IP_HOSTNAME=lfs
-LFS_IP_FQDN=lfs.susiland.net
-
-### Used in 7.7 to set LANG env variable in /etc/profile
-### and in the systemd version in the /etc/locale.conf file
-LFS_LANG=en_US.UTF-8
-
+BLFS_MAKE_FLAGS=-j4
 
 
 ############################ Functions #############################
